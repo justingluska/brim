@@ -25,6 +25,15 @@ it at your server, sign in, and your library is there: watch, share, comment.
 
 Brim does not record. It is a viewer.
 
+<p align="center">
+  <img src="docs/screenshots/library.png" width="24%" alt="Library: a list of recordings with thumbnails, durations, views and comments">
+  <img src="docs/screenshots/player.png" width="24%" alt="Player: video, share button, playback speed, summary and chapters">
+  <img src="docs/screenshots/comments.png" width="24%" alt="Chapters, emoji reactions and timestamped comments">
+  <img src="docs/screenshots/sign-in.png" width="24%" alt="Sign-in: choose cap.so or a self-hosted server">
+</p>
+
+<p align="center"><sub>Shown with made-up sample data. The screenshots are taken by a UI test, never from a real account.</sub></p>
+
 > **Not affiliated with Cap.** Brim is an independent project. It is not
 > endorsed by, sponsored by, or connected to Cap Software, Inc. "Cap" is a
 > trademark of Cap Software, Inc. Cap's server is open source (AGPL-3.0) at
