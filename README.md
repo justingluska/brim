@@ -32,7 +32,7 @@ Brim does not record. It is a viewer.
   <img src="docs/screenshots/sign-in.png" width="24%" alt="Sign-in: choose cap.so or a self-hosted server">
 </p>
 
-<p align="center"><sub>Shown with made-up sample data. The screenshots are taken by a UI test, never from a real account.</sub></p>
+<p align="center"><sub>Shown with the built-in demo library. The screenshots are taken by a UI test, never from a real account.</sub></p>
 
 > **Not affiliated with Cap.** Brim is an independent project. It is not
 > endorsed by, sponsored by, or connected to Cap Software, Inc. "Cap" is a
@@ -57,6 +57,9 @@ Brim does not record. It is a viewer.
   password, download the file, per-cap analytics, delete.
 - **Talk back.** Comments and emoji reactions posted at the current playback
   time.
+- **Try it without an account.** "Try the demo" on the sign-in screen opens a
+  sample library that runs entirely on the phone, so you can look around
+  before pointing Brim at a server.
 - **Private by design.** No analytics, no tracking, no third-party services.
   Keys live in the iOS Keychain and never sync off the device.
 

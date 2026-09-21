@@ -35,6 +35,22 @@ gitignored.
 - The deployment target is iOS 17. Check API availability; the compiler only
   catches it when you build for 17.
 
+## Demo mode and screenshots
+
+`Brim/Services/DemoMode.swift` is a fake Cap server that lives inside the app:
+a `URLProtocol` that answers the mobile API with invented people, titles,
+generated thumbnails and a bundled synthetic video. "Try the demo" on the
+sign-in screen uses it, and so does the `-BrimDemo` launch argument, which also
+keeps the app away from the Keychain.
+
+`BrimUITests/ScreenshotTests.swift` launches with `-BrimDemo`, walks the main
+screens and attaches a PNG of each to the test results. The README images come
+from there. If you change a screen, run that test and update
+`docs/screenshots/`. Never add a screenshot taken from a real account.
+
+If you add an endpoint to `CapKit`, teach the demo server to answer it too, or
+the demo will show an error on that screen.
+
 ## Pull requests
 
 - One topic per pull request, with a short description of what changed and
