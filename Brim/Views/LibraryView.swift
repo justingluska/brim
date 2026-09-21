@@ -198,7 +198,10 @@ struct LibraryView: View {
             }
             Section {
                 ForEach(model.visibleCaps) { cap in
-                    NavigationLink(value: cap) {
+                    // The link is invisible so the list does not add its own
+                    // disclosure chevron beside the card; the row stays tappable.
+                    ZStack {
+                        NavigationLink(value: cap) { EmptyView() }.opacity(0)
                         CapRow(cap: cap, client: session.client)
                     }
                     .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))

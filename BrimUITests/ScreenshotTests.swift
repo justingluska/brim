@@ -45,21 +45,26 @@ final class ScreenshotTests: XCTestCase {
         settle(1)
         snap("04-settings")
 
-        // Library again, in dark mode
-        app.tabBars.buttons["Library"].tap()
+        // Dark mode: the appearance only applies reliably to a fresh launch.
+        app.terminate()
         XCUIDevice.shared.appearance = .dark
-        XCTAssertTrue(firstCap.waitForExistence(timeout: 10))
+        app.launch()
+        XCTAssertTrue(firstCap.waitForExistence(timeout: 30))
         settle(2)
         snap("05-library-dark")
-        XCUIDevice.shared.appearance = .light
+        firstCap.tap()
+        XCTAssertTrue(app.buttons["Share"].firstMatch.waitForExistence(timeout: 20))
+        settle(4)
+        snap("06-player-dark")
 
         // Sign-in, from a clean launch without the demo flag
         app.terminate()
+        XCUIDevice.shared.appearance = .light
         app.launchArguments = []
         app.launch()
         XCTAssertTrue(app.buttons["Continue"].firstMatch.waitForExistence(timeout: 20), "sign-in screen did not appear")
         settle(1)
-        snap("06-sign-in")
+        snap("07-sign-in")
     }
 
     /// Screenshots need the UI to finish animating; this is a test-only pause,
