@@ -1,0 +1,52 @@
+{
+ "user": {
+  "id": "id0000000000001",
+  "name": "Test",
+  "lastName": null,
+  "email": "user@example.com",
+  "imageUrl": null,
+  "activeOrganizationId": "id0000000000002"
+ },
+ "organizations": [
+  {
+   "id": "id0000000000002",
+   "name": "Test",
+   "iconUrl": null,
+   "role": "owner"
+  }
+ ],
+ "activeOrganizationId": "id0000000000002",
+ "rootFolders": [],
+ "spaces": [
+  {
+   "id": "id0000000000002",
+   "name": "Test",
+   "iconUrl": null,
+   "kind": "organization",
+   "privacy": "Public",
+   "role": "owner",
+   "canManage": true,
+   "hasPassword": false
+  },
+  {
+   "id": "id0000000000003",
+   "name": "Test",
+   "iconUrl": null,
+   "kind": "space",
+   "privacy": "Private",
+   "role": "admin",
+   "canManage": true,
+   "hasPassword": false
+  },
+  {
+   "id": "id0000000000004",
+   "name": "Test",
+   "iconUrl": null,
+   "kind": "space",
+   "privacy": "Private",
+   "role": "admin",
+   "canManage": true,
+   "hasPassword": false
+  }
+ ]
+}

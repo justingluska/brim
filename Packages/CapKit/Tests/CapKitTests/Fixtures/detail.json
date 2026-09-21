@@ -1,0 +1,27 @@
+{
+ "cap": {
+  "id": "id0000000000005",
+  "shareUrl": "https://cap.example.com/s/id0000000000005",
+  "title": "Sample cap 2",
+  "createdAt": "2026-09-13T19:45:01.000Z",
+  "updatedAt": "2026-09-13T19:46:22.000Z",
+  "ownerId": "id0000000000001",
+  "ownerName": "Test",
+  "durationSeconds": 264.3,
+  "thumbnailUrl": "https://cap.example.com/api/mobile/caps/id0000000000005/thumbnail?v=1789328782000",
+  "thumbnailCacheKey": "cap-thumbnail:id0000000000005:1789328782000",
+  "folderId": null,
+  "public": true,
+  "protected": false,
+  "viewCount": 0,
+  "commentCount": 0,
+  "reactionCount": 0,
+  "upload": null,
+  "ownedByCurrentUser": true
+ },
+ "summary": null,
+ "chapters": [],
+ "transcriptionStatus": null,
+ "comments": [],
+ "shareUrl": "https://cap.example.com/s/id0000000000005"
+}

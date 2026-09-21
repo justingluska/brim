@@ -1,0 +1,4 @@
+{
+ "fileName": "sample-cap.mp4",
+ "url": "https://storage.example.com/bucket/id0000000000001/id0000000000005/result.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=REDACTED&X-Amz-Date=20260921T013248Z&X-Amz-Expires=3600&X-Amz-Signature=REDACTED&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+}
