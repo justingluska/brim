@@ -12,6 +12,10 @@ struct Account: Codable, Identifiable, Hashable {
     var email: String
     var displayName: String
     var addedAt: Date
+    /// The built-in sample library (see DemoMode.swift). Never persisted.
+    var isDemo: Bool?
+
+    var isDemoAccount: Bool { isDemo == true }
 
     var label: String { displayName.isEmpty ? email : displayName }
 }
@@ -38,8 +42,17 @@ final class SessionStore {
 
     var isSignedIn: Bool { activeAccount != nil }
 
+    /// Launched with `-BrimDemo` (screenshot tests): run on sample data only
+    /// and never read or write the Keychain.
+    private let ephemeral: Bool
+
     init() {
-        load()
+        ephemeral = Demo.isRequestedAtLaunch
+        if ephemeral {
+            startDemo()
+        } else {
+            load()
+        }
     }
 
     // MARK: Persistence
@@ -59,12 +72,13 @@ final class SessionStore {
     }
 
     private func persist() {
+        guard !ephemeral else { return }
         do {
-            try Keychain.write(Self.accountsKey, JSONEncoder().encode(accounts))
+            try Keychain.write(Self.accountsKey, JSONEncoder().encode(accounts.filter { !$0.isDemoAccount }))
         } catch {
             lastError = "Could not save accounts to the Keychain: \(error)"
         }
-        if let activeAccountId {
+        if let activeAccountId, activeAccount?.isDemoAccount != true {
             UserDefaults.standard.set(activeAccountId.uuidString, forKey: Self.activeKey)
         } else {
             UserDefaults.standard.removeObject(forKey: Self.activeKey)
@@ -75,7 +89,7 @@ final class SessionStore {
         needsReauth = false
         bootstrap = nil
         if let account = activeAccount {
-            client = CapClient(server: account.server, apiKey: account.apiKey)
+            client = account.isDemoAccount ? Demo.makeClient() : CapClient(server: account.server, apiKey: account.apiKey)
         } else {
             client = nil
         }
@@ -103,6 +117,16 @@ final class SessionStore {
         needsReauth = false
     }
 
+    /// Adds the sample library and makes it active. It lives only in memory.
+    func startDemo() {
+        if !accounts.contains(where: { $0.isDemoAccount }) {
+            accounts.append(Demo.makeAccount())
+        }
+        activeAccountId = Demo.accountId
+        persist()
+        rebuildClient()
+    }
+
     func switchTo(_ account: Account) {
         guard accounts.contains(where: { $0.id == account.id }) else { return }
         activeAccountId = account.id
@@ -112,7 +136,7 @@ final class SessionStore {
 
     /// Revokes the key on the server (best effort) and forgets the account.
     func signOut(_ account: Account) async {
-        if accounts.contains(where: { $0.id == account.id }) {
+        if !account.isDemoAccount, accounts.contains(where: { $0.id == account.id }) {
             try? await CapClient(server: account.server, apiKey: account.apiKey).revokeSession()
         }
         accounts.removeAll { $0.id == account.id }

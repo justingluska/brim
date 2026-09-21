@@ -115,6 +115,21 @@ struct SignInView: View {
             }
             .buttonStyle(BrandButtonStyle())
             .disabled(busy || (hostChoice == .selfHosted && serverText.trimmingCharacters(in: .whitespaces).isEmpty))
+
+            if !isReauth {
+                VStack(spacing: 4) {
+                    Button("Try the demo") {
+                        session.startDemo()
+                        if isModal { dismiss() }
+                    }
+                    .font(.subheadline.weight(.semibold))
+                    Text("Explore Brim with sample recordings. Nothing leaves your phone.")
+                        .font(.caption).foregroundStyle(Theme.Colors.inkFaint)
+                        .multilineTextAlignment(.center)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.top, 8)
+            }
         }
     }
 

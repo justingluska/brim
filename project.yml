@@ -37,6 +37,7 @@ schemes:
       gatherCoverageData: true
       targets:
         - name: BrimTests
+        - name: BrimUITests
         - package: CapKit/CapKitTests
 
 targets:
@@ -95,3 +96,18 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.gluska.brim.tests
         GENERATE_INFOPLIST_FILE: YES
+
+  # Drives the built-in demo library and attaches screenshots to the results.
+  BrimUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: BrimUITests
+    dependencies:
+      - target: Brim
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gluska.brim.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: Brim

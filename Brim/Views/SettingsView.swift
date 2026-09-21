@@ -21,11 +21,11 @@ struct SettingsView: View {
                             if account.id != session.activeAccountId { session.switchTo(account) }
                         } label: {
                             HStack(spacing: 12) {
-                                Image(systemName: account.server.isCloud ? "cloud" : "server.rack")
+                                Image(systemName: account.isDemoAccount ? "sparkles" : (account.server.isCloud ? "cloud" : "server.rack"))
                                     .foregroundStyle(Theme.Colors.brand).frame(width: 24)
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(account.label).foregroundStyle(Theme.Colors.ink)
-                                    Text("\(account.email) · \(account.server.displayHost)")
+                                    Text(account.isDemoAccount ? "Sample library on this device" : "\(account.email) · \(account.server.displayHost)")
                                         .font(.caption).foregroundStyle(Theme.Colors.inkSoft)
                                 }
                                 Spacer()
@@ -88,7 +88,7 @@ struct SettingsView: View {
         .sheet(isPresented: $showAddAccount) {
             SignInView(mode: .addAccount)
         }
-        .confirmationDialog("Sign out of \(accountToSignOut?.server.displayHost ?? "")?", isPresented: Binding(get: { accountToSignOut != nil }, set: { if !$0 { accountToSignOut = nil } }), titleVisibility: .visible) {
+        .confirmationDialog("Sign out of \(accountToSignOut?.isDemoAccount == true ? "the demo" : (accountToSignOut?.server.displayHost ?? ""))?", isPresented: Binding(get: { accountToSignOut != nil }, set: { if !$0 { accountToSignOut = nil } }), titleVisibility: .visible) {
             Button("Sign out", role: .destructive) {
                 if let account = accountToSignOut { Task { await session.signOut(account) } }
                 accountToSignOut = nil
